@@ -36,4 +36,6 @@ while IFS= read -r plugin; do
 
 done < <(cat "plugins.txt")
 
+rm temp_details
+
 ##curl -s "https://plugins.jenkins.io/ansible-tower/healthscore/" | xmllint --html --xpath 'string(//span[@id="pluginHealth--score-value"])' - 2>/dev/null
