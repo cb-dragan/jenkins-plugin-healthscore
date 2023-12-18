@@ -5,15 +5,18 @@ echo "Name, Health, Last Release, Adoption, Deprecation, Repository Configuratio
 
 while IFS= read -r plugin; do
 
+    healthscore_url="https://plugins.jenkins.io/${plugin}/healthscore/"
     if [ -f htmls/${plugin}.html ]; then
         echo "Already downloaded ${plugin}"
     else
         echo "Downloading ${plugin}"
-        curl -s "https://plugins.jenkins.io/${plugin}/healthscore/" > htmls/${plugin}.html
+        curl -s "${healthscore_url}" > htmls/${plugin}.html
         sleep 2
     fi
 
-    # Uncomment this the first time to get the HTMLs locally. Then you can comment it out and continue to use the locally downloaded HTMLs
+    # Uncomment this the first time to download the HTMLs locally. 
+    # Then you can comment this part out and continue to use the locally downloaded HTMLs
+    # It is good to uncomment from time to time to refresh the local cache
     # curl -s "https://plugins.jenkins.io/${plugin}/healthscore/" > htmls/${plugin}.html
     # sleep 2
     
@@ -27,7 +30,9 @@ while IFS= read -r plugin; do
 
     cat temp_details | sed 's/Adoption//' | sed 's/Deprecation//' | sed 's/Repository Configuration//' | sed 's/Security//' | sed 's/Update Center Plugin Publication//' | tr '\n' ' ' >> done.csv
 
-    echo "" >> done.csv
+    echo ", ${healthscore_url}" >> done.csv
+
+    #echo "" >> done.csv
 
 done < <(cat "plugins.txt")
 
