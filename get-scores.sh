@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p htmls
-echo "Name, Health, Last Release, Adoption, Deprecation, Repository Configuration, Security, Update Center Plugin Publication " > done.csv
+echo "Name, Health, Last Release, Adoption, Deprecation, Repository Configuration, Security, Update Center Plugin Publication, Healthscore URL " > done.csv
 
 while IFS= read -r plugin; do
 
@@ -30,7 +30,7 @@ while IFS= read -r plugin; do
 
     cat temp_details | sed 's/Adoption//' | sed 's/Deprecation//' | sed 's/Repository Configuration//' | sed 's/Security//' | sed 's/Update Center Plugin Publication//' | tr '\n' ' ' >> done.csv
 
-    echo ", ${healthscore_url}" >> done.csv
+    echo ", \"${healthscore_url}\"" >> done.csv
 
     #echo "" >> done.csv
 
