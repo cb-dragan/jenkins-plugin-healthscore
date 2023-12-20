@@ -6,6 +6,8 @@ Obtains healthscores for a provided list of plugins
 `plugins.txt` should contain a list of plugins, each plugin in a separate line.
 The short names of the plugins should be used.
 
+The script needs `xmllint`.
+
 ## Run
 `get-scores.sh`
 
@@ -18,4 +20,4 @@ Todo: Cache invalidation if sufficient time has passed since last downloaded.
 
 ## Output
 
-A CSV file is generated with scores for each plugin.  
+A CSV file is generated with scores for each plugin.
